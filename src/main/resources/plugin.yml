@@ -1,0 +1,10 @@
+name: @name@
+version: @version@
+description: @description@
+author: Example Author <contact@example.com>
+website: https://example.com
+main: me.jackwilsdon.avox.AvoxPlugin
+permissions:
+  avox.is-avox:
+    description: This player is an avox.
+    default: false

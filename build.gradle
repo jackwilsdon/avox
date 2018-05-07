@@ -1,0 +1,27 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.41"
+}
+
+dependencies {
+    compileOnly "org.bukkit:bukkit:${bukkitVersion}"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.2.41"
+}
+
+repositories {
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+    mavenCentral()
+}
+
+processResources.from("src/main/resources/plugin.yml") {
+    filter(ReplaceTokens, tokens: [
+        name: project.name,
+        description: project.description,
+        version: project.version,
+    ])
+}
+
+jar.from {
+    configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+}
